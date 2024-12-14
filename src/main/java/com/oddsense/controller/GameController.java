@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/games")
 public class GameController {
@@ -33,6 +34,11 @@ public class GameController {
         LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
         LocalDateTime endOfDay = startOfDay.plusDays(1).minusSeconds(1);
         return gameRepository.findByDateTimeBetween(startOfDay, endOfDay);
+    }
+
+    @GetMapping()
+    public List<Game> getAllGames() {
+        return gameRepository.findAll();
     }
 
     @GetMapping("/{id}")
