@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.oddsense.model.Fixture;
 import com.oddsense.model.FixtureBet;
 import com.oddsense.service.FixtureService;
 
@@ -22,6 +21,11 @@ public class FixtureController {
 
     @GetMapping("/api/fixtures/today")
     public List<FixtureBet> getFixturesForToday() {
+        return fixtureService.getFixturesForToday();
+    }
+
+    @GetMapping("/api/fixtures/events")
+    public List<FixtureBet> getFixturesEvents() {
         return fixtureService.getFixturesForToday();
     }
 }

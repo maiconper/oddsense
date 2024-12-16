@@ -1,11 +1,16 @@
 package com.oddsense.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +30,15 @@ public class Fixture {
     @ManyToOne
     @JoinColumn(name = "league_id")
     private League league;
+
+    @OneToMany(mappedBy = "fixture", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Event> events;
+
+    @OneToMany(mappedBy = "fixture", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lineup> lineups;
+
+    @OneToMany(mappedBy = "fixture", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Statistic> statistics;
 
     @ManyToOne
     @JoinColumn(name = "home_team_id")
@@ -219,6 +233,48 @@ public class Fixture {
      */
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    /**
+     * @return List<Event> return the events
+     */
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    /**
+     * @param events the events to set
+     */
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    /**
+     * @return List<Lineup> return the lineups
+     */
+    public List<Lineup> getLineups() {
+        return lineups;
+    }
+
+    /**
+     * @param lineups the lineups to set
+     */
+    public void setLineups(List<Lineup> lineups) {
+        this.lineups = lineups;
+    }
+
+    /**
+     * @return List<Statistic> return the statistics
+     */
+    public List<Statistic> getStatistics() {
+        return statistics;
+    }
+
+    /**
+     * @param statistics the statistics to set
+     */
+    public void setStatistics(List<Statistic> statistics) {
+        this.statistics = statistics;
     }
 
 }
